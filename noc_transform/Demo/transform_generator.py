@@ -8,6 +8,8 @@ sys.path.append("../points-shape-detect")
 import numpy as np
 import open3d as o3d
 
+from points_shape_detect.Method.trans import transPointArray
+
 from noc_transform.Data.obb import OBB
 from noc_transform.Module.transform_generator import TransformGenerator
 
@@ -24,18 +26,9 @@ def demo():
     points = transPointArray(points, translate, euler_angle, scale)
     obb.points = points
 
-    noc_obb = transform_generator.getNOCOBB(obb)
-    noc_obb.outputInfo()
-
     trans_matrix = transform_generator.getNOCTransform(obb)
-    trans_matrix_inv = np.linalg.inv(trans_matrix)
 
     trans_obb = obb.clone()
     trans_obb.transform(trans_matrix)
     print(trans_obb.points)
-
-    noc_trans_obb = noc_obb.clone()
-    noc_trans_obb.transform(trans_matrix_inv)
-    print("====compare====")
-    print(obb.points - noc_trans_obb.points)
     return True
