@@ -11,6 +11,15 @@ class TransformGenerator(object):
     def __init__(self):
         return
 
+    def getOBB(self, obb_points):
+        return OBB(obb_points)
+
+    def getOBBFromABBPoints(self, min_point, max_point):
+        return OBB.fromABBPoints(min_point, max_point)
+
+    def getOBBFromABBList(self, abb_list):
+        return OBB.fromABBList(abb_list)
+
     def getNOCOBB(self, obb):
         return getNOCOBB(obb)
 
