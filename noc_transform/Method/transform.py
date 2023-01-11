@@ -6,6 +6,7 @@ from copy import deepcopy
 
 from noc_transform.Method.noc import getNOCOBB
 
+
 def getNOCTransform(obb):
     noc_obb = getNOCOBB(obb)
 
@@ -20,3 +21,10 @@ def getNOCTransform(obb):
 
     transform = np.linalg.inv(A).dot(b)
     return transform
+
+
+def transPoints(points, transform):
+    copy_points = np.ones((points.shape[0], 4))
+    copy_points[:, :3] = deepcopy(points)
+    copy_points = copy_points @ transform
+    return copy_points[:, :3]
