@@ -25,3 +25,7 @@ class TransformGenerator(object):
 
     def getNOCTransform(self, obb):
         return getNOCTransform(obb)
+
+    def getBoxTransform(self, obb):
+        noc_obb = OBB.fromABBList([-0.5, -0.5, -0.5, 0.5, 0.5, 0.5])
+        return getNOCTransform(obb, noc_obb)

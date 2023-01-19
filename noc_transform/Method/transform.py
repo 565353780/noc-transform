@@ -7,8 +7,9 @@ from copy import deepcopy
 from noc_transform.Method.noc import getNOCOBB
 
 
-def getNOCTransform(obb):
-    noc_obb = getNOCOBB(obb)
+def getNOCTransform(obb, noc_obb=None):
+    if noc_obb is None:
+        noc_obb = getNOCOBB(obb)
 
     source_points = np.ones((8, 4), dtype=float)
     source_points[:, :3] = deepcopy(obb.points)
